@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Growth Rate Analysis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Growth Rate Analysis</h1>
+  <p>Welcome! This application calculates specific growth rates 
+     based on your Excel data. Please upload your file below:</p>
+
+  <div class="upload-container">
+    <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+      <label for="excel_file">Select Excel File:</label><br>
+      <input type="file" id="excel_file" name="excel_file" required><br><br>
+
+      <input type="submit" value="Upload">
+    </form>
+  </div>
+</body>
+</html>
