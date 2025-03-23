@@ -1,0 +1,47 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: imindian
+      MYSQL_DATABASE: lab_management
+      MYSQL_USER: root
+      MYSQL_PASSWORD: imindian
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./Databasescript.sql:/docker-entrypoint-initdb.d/Databasescript.sql
+
+  chatbot:
+    build:
+      context: ./chatbot
+      dockerfile: Dockerfile
+    container_name: chatbot_app
+    depends_on:
+      - db
+      - model
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: imindian
+      DB_NAME: lab_management
+      MODEL_API_URL: http://model:8000 
+    volumes:
+      - ./chatbot:/app
+    ports:
+      - "8501:8501"
+    command: ["streamlit", "run", "UI.py", "--server.port=8501", "--server.address=0.0.0.0"]
+
+  model:
+    build:
+      context: ./model
+      dockerfile: Dockerfile
+    container_name: model_api
+    environment:
+      CONFIG_FILE: /app/config.yml
+    volumes:
+      - ./model/config.yml:/app/config.yml
+    ports:
+      - "8000:8000"
+
