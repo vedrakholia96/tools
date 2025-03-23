@@ -1,0 +1,13 @@
+fastapi==0.95.2         # For building the backend API
+uvicorn==0.22.0         # For running FastAPI with ASGI
+openai==0.28.1          # Correct version for Chat API (gpt-4 or gpt-3.5-turbo)
+mysql-connector-python  # For MySQL database connection
+
+streamlit==1.25.0       # For the frontend UI
+pandas==2.1.0           # For reading Excel files and data manipulation
+matplotlib==3.8.0       # For plotting graphs
+requests==2.31.0        # For making API requests from Streamlit to FastAPI
+
+# Optional dependencies for reading Excel files
+openpyxl==3.1.2         # For reading .xlsx files
+xlrd==2.0.1             # For reading .xls files
